@@ -21,3 +21,19 @@ export const login = credentials => dispatch => {
         }));
 }
 
+axios.get(`${BACKEND_URL}/dates/:user_id`, {
+    headers: {
+      Authorization: localStorage.getItem('token')
+    }
+  })
+    .then(res => dispatch({
+      type: FETCH_DATA_SUCCESS,
+      payload: res.data
+    }))
+    .catch(err => dispatch({
+      type: FETCH_DATA_FAIL,
+      payload: err
+    }))
+
+
+
