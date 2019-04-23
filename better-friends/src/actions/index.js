@@ -11,7 +11,7 @@ export const login = credentials => dispatch => {
     
     dispatch({ type: LOGIN_START });
 
-    return axios.post(`${BACKEND_URL}/dates/:user_id`, credentials)
+    return axios.post('https://better-friend-server.herokuapp.com/dates/:user_id', credentials)
         .then(res => dispatch({
             type: LOGIN_SUCCESS,
             payload: res.data
@@ -21,7 +21,8 @@ export const login = credentials => dispatch => {
         }));
 }
 
-axios.get(`${BACKEND_URL}/dates/:user_id`, {
+export const getData = () => dispatch => {
+axios.get('https://better-friend-server.herokuapp.com/dates/:user_id', {
     headers: {
       Authorization: localStorage.getItem('token')
     }
@@ -34,6 +35,6 @@ axios.get(`${BACKEND_URL}/dates/:user_id`, {
       type: FETCH_DATA_FAIL,
       payload: err
     }))
-
+}
 
 
