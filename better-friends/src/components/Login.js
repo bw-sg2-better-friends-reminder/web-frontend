@@ -22,10 +22,10 @@ class Login extends React.Component {
                         <TextField
                         hintText="Enter your Password"
                         floatingLabelText="Password"
-                        onChange = {(event, NewValue) => 
-                        this.setState({ password:newValue})}
+                        // onChange = {(event, NewValue) => 
+                        // this.setState({ password:newValue})}
                         /><br/>
-                        <RaisedButton label="Submit" primary={true} style={style} onClick={(event) => this.handleClick(event)}/>
+                        {/* <RaisedButton label="Submit" primary={true} style={style} onClick={(event) => this.handleClick(event)}/> */}
                     </div>
                 </MuiThemeProvider>
             </div>

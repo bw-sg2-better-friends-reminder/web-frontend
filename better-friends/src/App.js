@@ -1,7 +1,10 @@
 import React from "react";
 import "./App.css";
 import Login from "./components/Login";
+import  { Route } from 'react-router-dom';
 import axios from 'axios';
+
+import Friends from './components/Friends';
 
 class App extends React.Component {
   constructor(props) {
@@ -15,7 +18,7 @@ class App extends React.Component {
     axios
       .get("https://better-friend-server.herokuapp.com/dates/:user_id")
       .then(res => {
-        console.log(response);
+        console.log(res);
         this.setState({
           friends: res.data
         });
@@ -41,7 +44,16 @@ class App extends React.Component {
             lazier one <span>👻</span>
           </p>
         </header>
-        <Login />
+
+        <Route path="/friends"  
+          render={props => (
+          <Friends 
+          {...props}
+            friends={this.state.friends} 
+        />
+        )}
+        />
+        
       </div>
     );
   }
