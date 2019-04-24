@@ -1,36 +1,65 @@
 import React from 'react';
-import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
-import AppBar from 'material-ui/AppBar';
-import RaisedButton from 'material-ui/RaisedButton';
-import TextField from 'material-ui/TextField';
+import { connect } from 'react-redux';
 
+import { login } from '../actions';
 
 class Login extends React.Component {
-    constructor(props) {
-        super(props);
-        this.state={
-            username: '',
-            password: ''
-        }
+  state = {
+    credentials: {
+      username: '',
+      password: ''
     }
-    render() {
-        return (
-            <div>
-                <MuiThemeProvider>
-                    <div>
-                        <AppBar title="Login" />
-                        <TextField
-                        hintText="Enter your Password"
-                        floatingLabelText="Password"
-                        // onChange = {(event, NewValue) => 
-                        // this.setState({ password:newValue})}
-                        /><br/>
-                        {/* <RaisedButton label="Submit" primary={true} style={style} onClick={(event) => this.handleClick(event)}/> */}
-                    </div>
-                </MuiThemeProvider>
-            </div>
-        )
-    }
+  };
+
+  handleChange = e => {
+    this.setState({
+      credentials: {
+        ...this.state.credentials,
+        [e.target.name]: e.target.value
+      }
+    });
+  };
+
+  login = e => {
+
+    e.preventDefault();
+    this.props.login(this.state.credentials)
+      .then(() => this.props.history.push('/protected'));
+
+  }
+
+  render() {
+    return (
+      <div>
+        <form onSubmit={this.login}>
+          <input
+            type="text"
+            name="username"
+            value={this.state.credentials.username}
+            onChange={this.handleChange}
+          />
+          <input
+            type="password"
+            name="password"
+            value={this.state.credentials.password}
+            onChange={this.handleChange}
+          />
+          <button>Log in</button>
+        </form>
+      </div>
+    );
+  }
 }
 
-export default Login;
+const stateToProps = state => {
+
+  return {
+
+    fetchingData: state.fetchingData,
+    error: state.error
+
+  }
+
+}
+
+export default connect(stateToProps, { login })(Login);
