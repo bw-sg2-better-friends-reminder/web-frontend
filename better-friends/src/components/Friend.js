@@ -1,19 +1,41 @@
-import React from 'react';
+import React from "react";
 
-const Friend = props => {
-    return (
-        <div className="Friend">
-            <h2>{props.name}</h2>
-            <p>{props.date}</p>
-            <p>{props.phoneNumber}</p>
-        </div>
-    );
+
+const truncate = (text, limit, ending = "...") => {
+  const splitText = text.split(" ");
+  if (splitText.length > limit) {
+    const reducedText = splitText.slice(0, limit);
+    const addedEnding = [...reducedText, ending];
+    return addedEnding.join(" ");
+  }
+  return text;
 };
 
-Friend.defaultProps = {
-    name: '',
-    date: '',
-    phoneNumber: ''
+const ListItem = props => {
+  const { date, person, phoneNumber, message } = props;
+  return (
+    <li>
+      <h1>{person}</h1>
+      <p>
+        <time>{date}</time>
+      </p>
+      <a href={`tel:${phoneNumber}`}>{phoneNumber}</a>
+      <p>{truncate(message, 50)}</p>
+    </li>
+  );
 };
+
+function Friend() {
+  return (
+    <div className="App">
+      <ListItem
+        date={"7/7/2017"}
+        person={"Lucy"}
+        phoneNumber={"555-555-5555"}
+        message={"Purchase Painting"}
+      />
+    </div>
+  );
+}
 
 export default Friend;

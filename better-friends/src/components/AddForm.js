@@ -12,12 +12,12 @@ class AddForm extends Component {
     };
   }
 
-  addDate = event => {
+  addFriend = event => {
     event.preventDefault();
 
     const friend = this.state;
     axios
-      .post("", friend)
+      .post("https://better-friend-server.herokuapp.com/", friend)
       .then(res => {
         this.props.updateFriends(res.data);
         this.props.history.push("/");

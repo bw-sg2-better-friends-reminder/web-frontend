@@ -1,10 +1,11 @@
 import React from "react";
 import "./App.css";
-import Login from "./components/Login";
+
 import  { Route } from 'react-router-dom';
 import axios from 'axios';
 
 import Friends from './components/Friends';
+import AddForm from './components/AddForm'
 
 class App extends React.Component {
   constructor(props) {
@@ -45,6 +46,15 @@ class App extends React.Component {
           </p>
         </header>
 
+        <Route path="/add-form" 
+          render={props => (
+          <AddForm 
+            {...props}
+            addFriend={this.addFriend}
+            updateFriends={this.updateFriends}
+          />
+          )}
+          />
         <Route path="/friends"  
           render={props => (
           <Friends 
