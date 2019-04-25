@@ -6,6 +6,8 @@ import axios from 'axios';
 
 import Friends from './components/Friends';
 import AddForm from './components/AddForm'
+import Login from './components/LoginPage/Login';
+import Register from './components/LoginPage/Register';
 
 class App extends React.Component {
   constructor(props) {
@@ -17,7 +19,7 @@ class App extends React.Component {
 
   componentDidMount() {
     axios
-      .get("https://better-friend-server.herokuapp.com/dates/:user_id")
+      .get(process.env.BACKEND_URL)
       .then(res => {
         console.log(res);
         this.setState({
@@ -46,6 +48,8 @@ class App extends React.Component {
           </p>
         </header>
 
+        <Route exact path="/" component={Login} />
+        <Route path="/register" component={Register} />
         <Route path="/add-form" 
           render={props => (
           <AddForm 
@@ -55,6 +59,7 @@ class App extends React.Component {
           />
           )}
           />
+          
         <Route path="/friends"  
           render={props => (
           <Friends 

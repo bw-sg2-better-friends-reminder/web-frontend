@@ -5,10 +5,10 @@ class AddForm extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      date: "",
-      personToSendMessageTo: "",
-      phone: "",
-      message: ""
+      date: '',
+      personToSendMessageTo: '',
+      phone: '',
+      message: ''
     };
   }
 
@@ -17,7 +17,7 @@ class AddForm extends Component {
 
     const friend = this.state;
     axios
-      .post("https://better-friend-server.herokuapp.com/", friend)
+      .post(process.env.BACKEND_URL, friend)
       .then(res => {
         this.props.updateFriends(res.data);
         this.props.history.push("/");
@@ -25,10 +25,10 @@ class AddForm extends Component {
       .catch(err => console.log(err));
 
     this.setState({
-      date: "",
-      personToSendMessageTo: "",
-      phone: "",
-      message: ""
+      date: '',
+      personToSendMessageTo: '',
+      phone: '',
+      message: ''
     });
   };
 
