@@ -53,9 +53,6 @@ const Submit = styled.button`
   }
 `;
 
-const RadioInputs = styled.div`
-  margin-bottom: 10px;
-`;
 
 class Login extends React.Component {
   state = {
@@ -78,9 +75,7 @@ class Login extends React.Component {
         localStorage.setItem("jwt", response.data.token);
         localStorage.setItem("userId", response.data.user_id);
         localStorage.setItem("username", response.data.username);
-        // localStorage.setItem("userType", response.data.user.role);
-        // this.setState({ userType: localStorage.getItem("userType") });
-        // this.props.getUserType(this.state.userType);
+
         this.props.history.push(`/user/${localStorage.getItem("userId")}`);
       })
       .catch(err => console.log(err));

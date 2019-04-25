@@ -19,7 +19,7 @@ class App extends React.Component {
 
   componentDidMount() {
     axios
-      .get(process.env.BACKEND_URL)
+      .get('http://localhost:5000')
       .then(res => {
         console.log(res);
         this.setState({

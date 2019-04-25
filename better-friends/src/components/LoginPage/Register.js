@@ -51,12 +51,10 @@ const Submit = styled.button`
   }
 `;
 
-const RadioInputs = styled.div`
-  margin-bottom: 10px;
-`;
+
 class Registration extends React.Component {
   state = {
-    username: "", //YOU MUST ALWAYS HAVE A UNIQUE EMAIL
+    username: "", 
     password: ""
   };
 
@@ -68,15 +66,20 @@ class Registration extends React.Component {
     event.preventDefault();
 
     axios
-      .post(`${process.env.BACKEND_URL}/register`, {
+      .post('http://localhost:5000/users/register', {
         username: this.state.username,
         password: this.state.password
       })
       .then(res => {
-        axios.post(`${process.env.BACKEND_URL}/login`, {
+        axios.post(`http://localhost:5000/users/login`, {
           username: this.state.username,
           password: this.state.password
-        });
+        })
+        .then(() => {
+          this.props.history.push(
+            `/dates/`
+          );
+        })
       })
       .catch(err => {
         console.log(err)
