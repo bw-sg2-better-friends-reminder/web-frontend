@@ -5,7 +5,7 @@ import  { NavLink, Route } from 'react-router-dom';
 import axios from 'axios';
 
 import Friends from './components/Friends';
-import AddForm from './components/AddForm'
+import AddForm from './components/AddForm';
 import Login from './components/LoginPage/Login';
 import Register from './components/LoginPage/Register';
 
@@ -22,17 +22,20 @@ class App extends React.Component {
 
   componentDidMount() {
     axios
-      .get('http://localhost:5000/user_id')
+      .get('http://localhost:5000/dates/:user_id')
       .then(res => {
         console.log(res);
         this.setState({
+          
           friends: res.data
         });
+        console.log(this.state.friends);
       })
       .catch(err => {
         console.log(err);
       });
   }
+
 
   updateFriends = friends => {
     this.setState({

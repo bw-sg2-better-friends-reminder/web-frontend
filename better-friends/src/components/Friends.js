@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-
+import '../App.css';
 import Friend from './Friend';
 
 class Friends extends Component {

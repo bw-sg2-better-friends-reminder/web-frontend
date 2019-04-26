@@ -15,9 +15,11 @@ class AddForm extends Component {
   addFriend = event => {
     event.preventDefault();
 
+    let user_id = localStorage.getItem('user_id');
+    
     const friend = this.state;
     axios
-      .post('http://localhost:5000/user_id', friend)
+      .post('http://localhost:5000/dates/:user_id', friend)
       .then(res => {
         this.props.updateFriends(res.data);
         this.props.history.push("/friends");
@@ -55,7 +57,7 @@ class AddForm extends Component {
           <input
             onChange={this.handleInputChange}
             placeholder="phone number"
-            value={this.state.number}
+            value={this.state.phoneNumber}
             name="number"
           />
             <input
