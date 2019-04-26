@@ -17,10 +17,10 @@ class AddForm extends Component {
 
     const friend = this.state;
     axios
-      .post(process.env.BACKEND_URL, friend)
+      .post('http://localhost:5000/user_id', friend)
       .then(res => {
         this.props.updateFriends(res.data);
-        this.props.history.push("/");
+        this.props.history.push("/friends");
       })
       .catch(err => console.log(err));
 
@@ -48,7 +48,7 @@ class AddForm extends Component {
           />
           <input
             onChange={this.handleInputChange}
-            placeholder="person to send message to"
+            placeholder="send message to"
             value={this.state.personToSendMessageTo}
             name="personToSendMessageTo"
           />
@@ -64,7 +64,7 @@ class AddForm extends Component {
             value={this.state.message}
             name="message"
           />
-          <button type="submit">Add new event</button>
+          <button type="submit">{this.props.friend ? `save changes` : `Add Event`}</button>
         </form>
       </div>
     );

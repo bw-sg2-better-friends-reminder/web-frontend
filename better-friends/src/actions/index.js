@@ -11,7 +11,7 @@ export const login = credentials => dispatch => {
     
     dispatch({ type: LOGIN_START });
 
-    return axios.post('https://better-friend-server.herokuapp.com/dates/:user_id', credentials)
+    return axios.post('http://localhost:5000', credentials)
         .then(res => dispatch({
             type: LOGIN_SUCCESS,
             payload: res.data
@@ -22,7 +22,7 @@ export const login = credentials => dispatch => {
 }
 
 export const getData = () => dispatch => {
-axios.get('https://better-friend-server.herokuapp.com/dates/:user_id', {
+axios.get('http://localhost:5000', {
     headers: {
       Authorization: localStorage.getItem('token')
     }
